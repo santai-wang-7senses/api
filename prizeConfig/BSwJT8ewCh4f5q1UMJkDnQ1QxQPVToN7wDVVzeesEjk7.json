@@ -1,7 +1,7 @@
 {
   "name": "BOX-V1",
   "totalNumber": 10,
-  "index": 1,
+  "index": 0,
   "prizeStatus": [
     {
       "tokenName": "RAY",
@@ -16,7 +16,7 @@
     {
       "tokenName": "RAY",
       "prize": 0.02,
-      "number": 7
+      "number": 8
     }
   ],
   "prizeList": [
@@ -51,7 +51,5 @@
       "prize": 0.02
     }
   ],
-  "ownedBoxes": [
-    0
-  ]
+  "ownedBoxes": []
 }
