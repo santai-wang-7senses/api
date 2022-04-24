@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import * as solanaService from './solana.service';
+// import * as solanaService from './solana.service';
 import { readFileSync, writeFileSync } from 'fs';
 import * as path from 'path';
 
