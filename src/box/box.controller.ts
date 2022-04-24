@@ -17,9 +17,14 @@ export class BoxController {
     return await this.boxService.getBoxList();
   }
 
-  @Get(':boxVersion')
+  @Get(':boxVersion/info')
   getBoxVersionInfo(@Param() params) {
     return this.boxService.getBoxVersionInfo(params.boxVersion);
+  }
+
+  @Get(':boxVersion/list')
+  getOwnedBoxList(@Param() params) {
+    return this.boxService.getOwnedBoxes(params.boxVersion);
   }
 
   @Post(':boxVersion')
@@ -32,7 +37,6 @@ export class BoxController {
     @Param('boxVersion') boxVersion,
     @Param('boxId', ParseIntPipe) boxId,
   ) {
-    console.log(boxVersion);
     return this.boxService.openBox(boxVersion, boxId);
   }
 }

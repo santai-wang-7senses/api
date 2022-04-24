@@ -29,6 +29,7 @@ export class BoxService {
 
     // Mint index NFT to user
     const boxId = boxInfo.index;
+    boxInfo.ownedBoxes.push(boxId);
 
     // counter ++
     boxInfo.index++;
@@ -49,6 +50,11 @@ export class BoxService {
     };
   }
 
+  async getOwnedBoxes(boxVersion) {
+    const boxInfo = await this.readBoxInfo(boxVersion);
+    return boxInfo.ownedBoxes;
+  }
+
   async openBox(boxVersion: string, boxId: number) {
     // // Establish connection to the cluster
     // await solanaService.establishConnection();
@@ -62,12 +68,24 @@ export class BoxService {
 
     const boxInfo = await this.readBoxInfo(boxVersion);
 
-    const prize = boxInfo.prizeList[boxId].prize;
-    boxInfo.prizeStatus.forEach((element) => {
-      if (element.prize === prize) {
-        element.number--;
+    let prize = -1;
+    boxInfo.ownedBoxes.map((element) => {
+      if (element === boxId) {
+        prize = boxInfo.prizeList[boxId].prize;
+        boxInfo.prizeStatus.forEach((element) => {
+          if (element.prize === prize) {
+            element.number--;
+          }
+        });
       }
     });
+
+    if (prize === -1) {
+      return {
+        status: `boxId ${boxId} is not yours`,
+        prize: null,
+      };
+    }
 
     this.writeBoxInfo(boxVersion, boxInfo);
 
@@ -131,6 +149,7 @@ export class BoxService {
           prize: 0.02,
         },
       ],
+      ownedBoxes: [],
     };
 
     await this.writeBoxInfo(
@@ -176,5 +195,13 @@ export class BoxService {
       path.join(__dirname, `../../prizeConfig/${boxVersion}.json`),
       JSON.stringify(boxInfo, null, 2),
     );
+  }
+
+  async getOwnedList(boxVersion) {
+    return JSON.parse(
+      readFileSync(
+        path.join(__dirname, `../../prizeConfig/${boxVersion}.json`),
+      ).toString(),
+    ).ownedBoxes;
   }
 }
