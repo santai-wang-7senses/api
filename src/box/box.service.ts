@@ -64,9 +64,6 @@ export class BoxService {
 
     const prize = boxInfo.prizeList[boxId].prize;
     boxInfo.prizeStatus.forEach((element) => {
-      console.log(element.prize);
-      console.log(prize);
-      console.log(element.prize === prize);
       if (element.prize === prize) {
         element.number--;
       }
@@ -78,6 +75,77 @@ export class BoxService {
       status: 'Success',
       prize,
     };
+  }
+
+  async resetBoxStatus() {
+    const defaultBoxInfo = {
+      name: 'BOX-V1',
+      totalNumber: 10,
+      index: 0,
+      prizeStatus: [
+        {
+          tokenName: 'RAY',
+          prize: 5,
+          number: 1,
+        },
+        {
+          tokenName: 'RAY',
+          prize: 1,
+          number: 1,
+        },
+        {
+          tokenName: 'RAY',
+          prize: 0.02,
+          number: 8,
+        },
+      ],
+      prizeList: [
+        {
+          prize: 0.02,
+        },
+        {
+          prize: 0.02,
+        },
+        {
+          prize: 0.02,
+        },
+        {
+          prize: 1,
+        },
+        {
+          prize: 0.02,
+        },
+        {
+          prize: 0.02,
+        },
+        {
+          prize: 0.02,
+        },
+        {
+          prize: 5,
+        },
+        {
+          prize: 0.02,
+        },
+        {
+          prize: 0.02,
+        },
+      ],
+    };
+
+    await this.writeBoxInfo(
+      'BSwJT8ewCh4f5q1UMJkDnQ1QxQPVToN7wDVVzeesEjk7',
+      defaultBoxInfo,
+    );
+    const defaultBoxList = [
+      {
+        name: 'Box-V1',
+        version: 'BSwJT8ewCh4f5q1UMJkDnQ1QxQPVToN7wDVVzeesEjk7',
+        price: 128,
+        restNumber: 10,
+      },
+    ];
+    await this.writeBoxList(defaultBoxList);
   }
 
   async readBoxList() {
