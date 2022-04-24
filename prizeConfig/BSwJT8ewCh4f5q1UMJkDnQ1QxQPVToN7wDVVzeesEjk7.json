@@ -1,0 +1,54 @@
+{
+  "name": "BOX-V1",
+  "totalNumber": 10,
+  "index": 10,
+  "prizeStatus": [
+    {
+      "tokenName": "RAY",
+      "prize": 5,
+      "number": 1
+    },
+    {
+      "tokenName": "RAY",
+      "prize": 1,
+      "number": 1
+    },
+    {
+      "tokenName": "RAY",
+      "prize": 0.02,
+      "number": 7
+    }
+  ],
+  "prizeList": [
+    {
+      "prize": 0.02
+    },
+    {
+      "prize": 0.02
+    },
+    {
+      "prize": 0.02
+    },
+    {
+      "prize": 1
+    },
+    {
+      "prize": 0.02
+    },
+    {
+      "prize": 0.02
+    },
+    {
+      "prize": 0.02
+    },
+    {
+      "prize": 5
+    },
+    {
+      "prize": 0.02
+    },
+    {
+      "prize": 0.02
+    }
+  ]
+}

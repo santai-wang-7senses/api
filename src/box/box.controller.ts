@@ -1,14 +1,20 @@
-import { Controller, Get, Param, ParseIntPipe, Patch } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { BoxService } from './box.service';
-import { BoxInfo } from './dto/box.dto';
 
 @Controller('box')
 export class BoxController {
   constructor(private readonly boxService: BoxService) {}
 
   @Get('list')
-  getBoxList() {
-    return this.boxService.getBoxList();
+  async getBoxList() {
+    return await this.boxService.getBoxList();
   }
 
   @Get(':boxVersion')
@@ -16,8 +22,17 @@ export class BoxController {
     return this.boxService.getBoxVersionInfo(params.boxVersion);
   }
 
+  @Post(':boxVersion')
+  async buyBox(@Param() params) {
+    return this.boxService.buyBox(params.boxVersion);
+  }
+
   @Patch(':boxVersion/:boxId')
-  openBox(@Param('boxId', ParseIntPipe) params) {
-    return this.boxService.openBox(params.boxVersion, params.boxId);
+  openBox(
+    @Param('boxVersion') boxVersion,
+    @Param('boxId', ParseIntPipe) boxId,
+  ) {
+    console.log(boxVersion);
+    return this.boxService.openBox(boxVersion, boxId);
   }
 }
